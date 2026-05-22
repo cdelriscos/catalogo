@@ -360,6 +360,19 @@
       min-width: 0;
     }
 
+    .summary-toolbar-right {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .summary-toolbar-right .filter-wrap {
+      display: grid;
+      grid-template-columns: 18px 70px 274px;
+      align-items: center;
+      column-gap: 10px;
+    }
+
     .btn {
       min-height: 40px;
       border: 1px solid #aeb6bf;
@@ -412,10 +425,102 @@
       outline: none;
     }
 
+    .date-select {
+      width: 240px;
+      height: 26px;
+      border: 1px solid #d7dde3;
+      border-radius: 4px;
+      background: #fff;
+      color: #4b5661;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 0 10px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .date-range-control {
+      position: relative;
+      width: 274px;
+      flex: 0 0 auto;
+    }
+
+    .date-range-input {
+      width: 100%;
+      height: 26px;
+      border: 1px solid #d7dde3;
+      border-radius: 4px;
+      background: #fff;
+      color: #4b5661;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 0 34px 0 10px;
+      outline: none;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    .date-range-control::after {
+      content: "";
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      width: 15px;
+      height: 15px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      background: currentColor;
+      color: #343c45;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2Zm13 8H4v10h16V10ZM4 8h16V6h-3v2h-2V6H9v2H7V6H4v2Z'/%3E%3C/svg%3E") center / contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2Zm13 8H4v10h16V10ZM4 8h16V6h-3v2h-2V6H9v2H7V6H4v2Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+
+    .date-range-panel {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 20;
+      width: 274px;
+      padding: 10px;
+      border: 1px solid #d7dde3;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(26, 39, 53, 0.16);
+    }
+
+    .date-range-panel.is-hidden {
+      display: none;
+    }
+
+    .date-range-panel label {
+      display: grid;
+      gap: 4px;
+      margin-bottom: 8px;
+      color: #5c6670;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .date-range-panel .date-select {
+      width: 100%;
+    }
+
     .filters-popover {
       width: 274px;
       margin-left: auto;
       flex: 0 0 auto;
+    }
+
+    .summary-toolbar-right .filters-popover,
+    .summary-toolbar-right .date-range-control {
+      width: 274px;
+      margin-left: 0;
+    }
+
+    .summary-toolbar-right .select {
+      width: 100%;
     }
 
     .value-field {
@@ -669,6 +774,209 @@
 
     .costeo-load-card tbody tr:last-child td {
       border-bottom: 0;
+    }
+
+    .costeo-load-op-link {
+      color: #0050b3;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .costeo-load-op-link:hover {
+      text-decoration: underline;
+    }
+
+    .costeo-load-detail-card {
+      max-width: none;
+      overflow: hidden;
+    }
+
+    .costeo-load-detail-card + .costeo-load-detail-card {
+      margin-top: 16px;
+    }
+
+    .costeo-load-detail-summary table,
+    .costeo-load-detail-breakdown table {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .costeo-load-detail-summary thead th,
+    .costeo-load-detail-breakdown thead th {
+      padding: 10px 12px 9px;
+      background: #fff;
+      border-bottom: 1px solid #d8dde3;
+      color: #323844;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .costeo-load-detail-summary tbody td,
+    .costeo-load-detail-breakdown tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e8edf2;
+      color: #2f3d4b;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .costeo-load-detail-summary tbody tr:last-child td,
+    .costeo-load-detail-breakdown tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .costeo-load-detail-summary thead th:nth-child(5),
+    .costeo-load-detail-summary tbody td:nth-child(5),
+    .costeo-load-detail-summary thead th:nth-child(6),
+    .costeo-load-detail-summary tbody td:nth-child(6),
+    .costeo-load-detail-summary thead th:nth-child(7),
+    .costeo-load-detail-summary tbody td:nth-child(7),
+    .costeo-load-detail-summary thead th:nth-child(8),
+    .costeo-load-detail-summary tbody td:nth-child(8) {
+      text-align: right;
+    }
+
+    .costeo-load-detail-summary thead th:last-child,
+    .costeo-load-detail-summary tbody td:last-child {
+      text-align: center;
+    }
+
+    .costeo-load-detail-breakdown td:nth-child(3),
+    .costeo-load-detail-breakdown td:nth-child(4),
+    .costeo-load-detail-breakdown td:nth-child(5),
+    .costeo-load-detail-breakdown td:nth-child(6),
+    .costeo-load-detail-breakdown td:nth-child(7) {
+      text-align: right;
+    }
+
+    .costeo-load-detail-breakdown tbody td:first-child,
+    .costeo-load-detail-breakdown .costeo-load-category {
+      text-align: left;
+    }
+
+    .costeo-load-detail-breakdown thead th:first-child {
+      text-align: center;
+    }
+
+    .costeo-load-detail-breakdown thead th:nth-child(2) {
+      text-align: left;
+    }
+
+    .costeo-load-detail-breakdown thead th:nth-child(n + 3) {
+      text-align: right;
+    }
+
+    .costeo-load-detail-breakdown .costeo-load-num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      padding-right: 16px;
+    }
+
+    .costeo-load-detail-breakdown .costeo-load-category {
+      padding-left: 14px;
+      white-space: normal;
+    }
+
+    .costeo-load-detail-breakdown tfoot td {
+      padding: 10px 14px;
+      border-top: 1px solid #c3d3e1;
+      background: #f3f7fb;
+      font-weight: 700;
+      color: #24313d;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .costeo-load-detail-breakdown tfoot td:first-child {
+      text-align: center;
+    }
+
+    .costeo-load-detail-breakdown tfoot .costeo-load-total-label {
+      text-align: left;
+      white-space: nowrap;
+      padding-left: 14px;
+    }
+
+    .costeo-load-detail-breakdown tfoot td:nth-child(n + 3) {
+      padding-right: 16px;
+    }
+
+    .costeo-load-detail-monthbar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 18px;
+      margin: 22px 0 14px;
+      padding: 2px 2px 0;
+    }
+
+    .costeo-load-detail-monthfield {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #5c6670;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .costeo-load-detail-monthfield .filter-icon {
+      width: 18px;
+      height: 18px;
+      color: #111;
+    }
+
+    .costeo-load-detail-monthfield .select {
+      width: 160px;
+      height: 26px;
+      border-radius: 4px;
+      border: 1px solid #d7dde3;
+      background-color: #fff;
+      color: #4b5661;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 0 10px;
+      box-shadow: none;
+      box-sizing: border-box;
+    }
+
+    .costeo-load-detail-month-total {
+      min-width: 120px;
+      text-align: right;
+      font-size: 14px;
+      font-weight: 700;
+      color: #24313d;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .costeo-load-type-cell {
+      font-weight: 700;
+      vertical-align: middle;
+      text-align: center;
+      letter-spacing: 0.01em;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .costeo-load-type-direct {
+      background: #dbead5;
+      color: #22313d;
+    }
+
+    .costeo-load-type-indirect {
+      background: #f7df91;
+      color: #22313d;
+    }
+
+    .costeo-load-detail-summary tbody td,
+    .costeo-load-detail-breakdown tbody td,
+    .costeo-load-detail-breakdown tfoot td {
+      font-variant-numeric: tabular-nums;
     }
 
     .costeo-drivers-card {
@@ -1207,7 +1515,7 @@
               </span>
             </a>
           </li>
-          <li class="nav-group" id="comparador-group">
+          <li class="nav-group is-hidden" id="comparador-group">
             <a class="nav-item nav-toggle" href="#" data-sidebar-toggle="comparador" aria-expanded="true">
               <span class="nav-label">
                 <span class="nav-icon">
@@ -1224,9 +1532,23 @@
                 </svg>
               </span>
             </a>
-            <ul class="nav-submenu" id="comparador-submenu">
+            <ul class="nav-submenu" id="comparador-submenu"></ul>
+          </li>
+          <li class="nav-group" id="costeo-group">
+            <a class="nav-item nav-toggle" href="#" data-sidebar-toggle="costeo" aria-expanded="true">
+              <span class="nav-label">
+                <span class="nav-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                  <span>Costos PT</span>
+              </span>
+              <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+            <ul class="nav-submenu" id="costeo-submenu">
               <li>
-                <a class="nav-item nav-subitem active" href="#" data-nav="comparador">
+                <a class="nav-item nav-subitem active" href="#" data-nav="costeo-summary">
                   <span class="nav-label">
                     <span class="nav-icon">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1239,21 +1561,6 @@
                   </span>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-group" id="costeo-group">
-            <a class="nav-item nav-toggle" href="#" data-sidebar-toggle="costeo" aria-expanded="true">
-              <span class="nav-label">
-                <span class="nav-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                </span>
-                <span>Costeo</span>
-              </span>
-              <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </a>
-            <ul class="nav-submenu" id="costeo-submenu">
               <li>
                 <a class="nav-item nav-subitem" href="#" data-nav="costeo">
                   <span class="nav-label">
@@ -1264,7 +1571,21 @@
                         <path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                       </svg>
                     </span>
-                    <span>Par&aacute;metros Costeo</span>
+                    <span>Par&aacute;metros de Costos</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-item nav-subitem" href="#" data-nav="costeo-load">
+                  <span class="nav-label">
+                    <span class="nav-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M6 3h8l4 4v14H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                    <span>Carga de Costos</span>
                   </span>
                 </a>
               </li>
@@ -1342,7 +1663,7 @@
         <div class="page-header">
           <h1 class="title">Tabla Resumen de Costos por PD y Estilo</h1>
           <div class="crumbs">
-            <span>Comparador</span>
+            <span>Costos PT</span>
             <span>&#8250;</span>
             <span>Tabla Resumen</span>
           </div>
@@ -1355,7 +1676,28 @@
               <button class="btn" type="button">Seleccionar columnas</button>
             </div>
 
-          <div class="toolbar-right">
+          <div class="toolbar-right summary-toolbar-right">
+            <div class="filter-wrap">
+              <span class="filter-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                  <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12 8H5v9.5c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V10Zm-15-4c-.28 0-.5.22-.5.5V8h15V6.5a.5.5 0 0 0-.5-.5h-1.5v1a1 1 0 1 1-2 0V6h-8v1a1 1 0 1 1-2 0V6H4Z"/>
+                </svg>
+              </span>
+              <span>Fecha</span>
+              <div class="date-range-control" aria-label="Filtro de rango de fecha">
+                <input class="date-range-input" type="text" id="summary-date-range-display" aria-label="Seleccionar rango de fecha" readonly />
+                <div class="date-range-panel is-hidden" id="summary-date-range-panel">
+                  <label>
+                    Inicio
+                    <input class="date-select" type="date" id="summary-date-start-filter" aria-label="Fecha inicial" />
+                  </label>
+                  <label>
+                    Fin
+                    <input class="date-select" type="date" id="summary-date-end-filter" aria-label="Fecha final" />
+                  </label>
+                </div>
+              </div>
+            </div>
             <div class="filter-wrap">
               <span class="filter-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
@@ -1520,12 +1862,11 @@
                 </span>
                 <span>Buscar en</span>
                 <div class="filters-popover" aria-label="Filtros detalle">
-                  <select class="select" id="detail-filter-select" aria-label="Seleccionar filtro detalle">
-                    <option>Seleccionar</option>
-                    <option>Cliente</option>
-                    <option>Costo</option>
-                    <option>Precio Venta</option>
-                    <option>Margen</option>
+                    <select class="select" id="detail-filter-select" aria-label="Seleccionar filtro detalle">
+                      <option>Seleccionar</option>
+                      <option>Costo</option>
+                      <option>Precio Venta</option>
+                      <option>Margen</option>
                     <option>Estado</option>
                     <option>Estilo</option>
                   </select>
@@ -1643,11 +1984,11 @@
 
       <main class="content is-hidden" id="costeo-view">
         <div class="page-header">
-          <h1 class="title">Parámetros de Costeo</h1>
+          <h1 class="title">Parámetros de Costos</h1>
           <div class="crumbs">
-            <span>Costeo</span>
+            <span>Costos PT</span>
             <span>&#8250;</span>
-            <span>Par&aacute;metros Costeo</span>
+            <span>Par&aacute;metros de Costos</span>
           </div>
         </div>
 
@@ -1675,17 +2016,12 @@
                   </tr>
                   <tr>
                     <td>Sección: 3</td>
-                    <td>Mano de Obra y Costos Indirectos</td>
+                    <td>Mano de Obra Directa y Costos Indirectos de Fabricación</td>
                     <td><a class="action-link costeo-table-link" href="#" data-costeo-target="labor">Ver</a></td>
                   </tr>
-                  <tr>
-                    <td>Sección: 4</td>
-                    <td>Carga de Costos</td>
-                    <td><a class="action-link costeo-table-link" href="#" data-costeo-target="load">Ver</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                  </tbody>
+                </table>
+              </div>
           </section>
         </div>
       </main>
@@ -1694,9 +2030,9 @@
         <div class="page-header">
           <h1 class="title">Tiempos Estándar por Producto</h1>
           <div class="crumbs">
-            <span>Costeo</span>
+            <span>Costos PT</span>
             <span>&#8250;</span>
-            <span>Par&aacute;metros de Costeo</span>
+            <span>Par&aacute;metros de Costos</span>
           </div>
         </div>
 
@@ -1760,9 +2096,9 @@
         <div class="page-header">
           <h1 class="title">Drivers Costos Indirectos por Área - Periodo</h1>
           <div class="crumbs">
-            <span>Costeo</span>
+            <span>Costos PT</span>
             <span>&#8250;</span>
-            <span>Par&aacute;metros de Costeo</span>
+            <span>Par&aacute;metros de Costos</span>
           </div>
         </div>
 
@@ -1909,11 +2245,11 @@
 
       <main class="content is-hidden" id="costeo-labor-view">
         <div class="page-header">
-          <h1 class="title">Mano de Obra y Costos Indirectos</h1>
+          <h1 class="title">Mano de Obra Directa y Costos Indirectos de Fabricación</h1>
           <div class="crumbs">
-            <span>Costeo</span>
+            <span>Costos PT</span>
             <span>&#8250;</span>
-            <span>Par&aacute;metros de Costeo</span>
+            <span>Par&aacute;metros de Costos</span>
           </div>
         </div>
 
@@ -2046,9 +2382,9 @@
         <div class="page-header">
           <h1 class="title">Carga de Costos</h1>
           <div class="crumbs">
-            <span>Costeo</span>
+            <span>Costos PT</span>
             <span>&#8250;</span>
-            <span>Par&aacute;metros de Costeo</span>
+            <span>Carga de Costos</span>
           </div>
         </div>
 
@@ -2090,7 +2426,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>OP 1</td>
+                    <td><a class="costeo-load-op-link" href="#" data-op="OP 1">OP 1</a></td>
                     <td>PD-01234</td>
                     <td>1</td>
                     <td>BATA HOMBRE NAVY</td>
@@ -2159,6 +2495,198 @@
           </section>
         </div>
       </main>
+
+      <main class="content is-hidden" id="costeo-load-detail-view">
+        <div class="page-header">
+          <h1 class="title">Detalle de Carga de Costos</h1>
+          <div class="crumbs">
+            <span>Costos PT</span>
+            <span>&#8250;</span>
+            <span>Carga de Costos</span>
+            <span>&#8250;</span>
+            <span>OP 1</span>
+          </div>
+        </div>
+
+        <div class="main">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <button class="btn" type="button">Exportar</button>
+              <button class="btn" type="button">Seleccionar columnas</button>
+            </div>
+
+            <div class="toolbar-right">
+              <a class="costeo-return-link" id="back-to-costeo-load-detail" href="#">
+                <span>Regresar</span>
+                <span class="costeo-return-arrow" aria-hidden="true">↩</span>
+              </a>
+            </div>
+          </div>
+
+          <section class="card costeo-load-detail-card costeo-load-detail-summary">
+            <div class="table-wrap">
+              <table>
+                <colgroup>
+                  <col style="width: 110px;">
+                  <col style="width: 130px;">
+                  <col style="width: 70px;">
+                  <col style="width: 270px;">
+                  <col style="width: 115px;">
+                  <col style="width: 115px;">
+                  <col style="width: 125px;">
+                  <col style="width: 125px;">
+                  <col style="width: 110px;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Orden (OP)</th>
+                    <th>PD</th>
+                    <th>Estilo</th>
+                    <th>Descripción</th>
+                    <th>Cant. Planeada</th>
+                    <th>Cant. Real</th>
+                    <th>Costo Total</th>
+                    <th>Costo Unitario</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="costeo-load-detail-summary-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="costeo-load-detail-monthbar">
+            <div class="costeo-load-detail-monthfield" data-month="todo">
+              <span class="filter-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12 8H5v9.5c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V10Zm-15-4c-.28 0-.5.22-.5.5V8h15V6.5a.5.5 0 0 0-.5-.5h-1.5v1a1 1 0 1 1-2 0V6h-8v1a1 1 0 1 1-2 0V6H4Z"/>
+                </svg>
+              </span>
+              <span>MES</span>
+              <select class="select" id="costeo-load-month-filter" aria-label="Seleccionar mes">
+                <option selected>Todo</option>
+                <option>Marzo</option>
+                <option>Abril</option>
+              </select>
+            </div>
+            <div class="costeo-load-detail-month-total" id="costeo-load-month-total" aria-live="polite">30,874.45</div>
+          </div>
+
+          <section class="card costeo-load-detail-card costeo-load-detail-breakdown">
+            <div class="table-wrap">
+              <table>
+                <colgroup>
+                  <col style="width: 110px;">
+                  <col style="width: 260px;">
+                  <col style="width: 150px;">
+                  <col style="width: 150px;">
+                  <col style="width: 170px;">
+                  <col style="width: 150px;">
+                  <col style="width: 150px;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Categoría</th>
+                    <th>Corte ($)</th>
+                    <th>Habilitado ($)</th>
+                    <th>Costura ($)</th>
+                    <th>Estampado ($)</th>
+                    <th>Acabado ($)</th>
+                  </tr>
+                </thead>
+                <tbody id="costeo-load-detail-breakdown-body">
+                  <tr>
+                    <td class="costeo-load-type-cell costeo-load-type-direct" rowspan="4">Directos</td>
+                    <td class="costeo-load-category">Materia Prima: Telas</td>
+                    <td class="costeo-load-num">833.76</td>
+                    <td class="costeo-load-num">929.10</td>
+                    <td class="costeo-load-num">8,202.36</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">2,384.56</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-category">Materia Prima: Avíos</td>
+                    <td class="costeo-load-num">312.66</td>
+                    <td class="costeo-load-num">348.41</td>
+                    <td class="costeo-load-num">3,075.89</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">894.21</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-category">Mano de Obra</td>
+                    <td class="costeo-load-num">166.75</td>
+                    <td class="costeo-load-num">185.82</td>
+                    <td class="costeo-load-num">1,640.47</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">476.91</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-category">Servicios</td>
+                    <td class="costeo-load-num">208.44</td>
+                    <td class="costeo-load-num">232.28</td>
+                    <td class="costeo-load-num">2,050.59</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">596.14</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-type-cell costeo-load-type-indirect" rowspan="5">Indirectos</td>
+                    <td class="costeo-load-category">Gastos de Fábrica</td>
+                    <td class="costeo-load-num">162.58</td>
+                    <td class="costeo-load-num">181.18</td>
+                    <td class="costeo-load-num">1,599.46</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">464.99</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-category">Mano de Obra</td>
+                    <td class="costeo-load-num">139.65</td>
+                    <td class="costeo-load-num">155.62</td>
+                    <td class="costeo-load-num">1,373.90</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">399.41</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-category">Depreciación</td>
+                    <td class="costeo-load-num">10.42</td>
+                    <td class="costeo-load-num">11.61</td>
+                    <td class="costeo-load-num">102.53</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">29.81</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-category">Administración</td>
+                    <td class="costeo-load-num">187.60</td>
+                    <td class="costeo-load-num">209.05</td>
+                    <td class="costeo-load-num">1,845.53</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">536.53</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-load-category">Ventas</td>
+                    <td class="costeo-load-num">62.53</td>
+                    <td class="costeo-load-num">69.68</td>
+                    <td class="costeo-load-num">615.18</td>
+                    <td class="costeo-load-num">0.00</td>
+                    <td class="costeo-load-num">178.84</td>
+                  </tr>
+                </tbody>
+                <tfoot id="costeo-load-detail-breakdown-footer">
+                  <tr>
+                    <td></td>
+                    <td class="costeo-load-total-label">TOTALES ($)</td>
+                    <td>2,084.39</td>
+                    <td>2,322.75</td>
+                    <td>20,505.91</td>
+                    <td>0.00</td>
+                    <td>5,961.40</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
     <script>
       const summaryView = document.getElementById('summary-view');
@@ -2169,20 +2697,35 @@
       const costeoDriversView = document.getElementById('costeo-drivers-view');
       const costeoLaborView = document.getElementById('costeo-labor-view');
       const costeoLoadView = document.getElementById('costeo-load-view');
+      const costeoLoadDetailView = document.getElementById('costeo-load-detail-view');
       const backToSummary = document.getElementById('back-to-summary');
       const backToDetail = document.getElementById('back-to-detail');
       const backToCosteo = document.getElementById('back-to-costeo');
       const backToCosteoDrivers = document.getElementById('back-to-costeo-drivers');
       const backToCosteoLabor = document.getElementById('back-to-costeo-labor');
       const backToCosteoLoad = document.getElementById('back-to-costeo-load');
+      const backToCosteoLoadDetail = document.getElementById('back-to-costeo-load-detail');
+      const summaryDateRangeDisplay = document.getElementById('summary-date-range-display');
+      const summaryDateRangePanel = document.getElementById('summary-date-range-panel');
+      const summaryDateStartFilter = document.getElementById('summary-date-start-filter');
+      const summaryDateEndFilter = document.getElementById('summary-date-end-filter');
       const detailBody = document.getElementById('detail-body');
       const detailFooter = document.getElementById('detail-footer');
       const costSummaryBody = document.getElementById('cost-summary-body');
+      const costeoLoadDetailSummaryBody = document.getElementById('costeo-load-detail-summary-body');
+      const costeoLoadDetailBreakdownBody = document.getElementById('costeo-load-detail-breakdown-body');
+      const costeoLoadDetailBreakdownFooter = document.getElementById('costeo-load-detail-breakdown-footer');
+      const costeoLoadMonthFilter = document.getElementById('costeo-load-month-filter');
+      const costeoLoadMonthTotal = document.getElementById('costeo-load-month-total');
+      const costeoLoadMonthField = document.querySelector('.costeo-load-detail-monthfield');
       const costViewAll = document.getElementById('cost-view-all');
       const costStyleGrid = document.getElementById('cost-style-grid');
       const detailLinks = Array.from(document.querySelectorAll('.detail-link'));
+      const costeoLoadOpLinks = Array.from(document.querySelectorAll('.costeo-load-op-link'));
       let currentDetailPd = 'PD-1234';
       let currentCostStyle = 'summary';
+      let currentCosteoLoadOp = 'OP 1';
+      let currentCosteoLoadMonth = 'Todo';
 
       const detailDatasets = {
         'PD-1234': {
@@ -2305,6 +2848,67 @@
         },
       };
 
+      const costeoLoadDetailDataset = {
+        'OP 1': {
+          summary: {
+            op: 'OP 1',
+            pd: 'PD-01234',
+            estilo: '1',
+            descripcion: 'BATA HOMBRE NAVY',
+            cantPlaneada: '1,000',
+            cantReal: '1,005',
+            costoTotal: '30,874.45',
+            costoUnitario: '30.72',
+            estado: 'finalizado',
+          },
+          directRows: [
+            ['Materia Prima: Telas', '833.76', '929.10', '8,202.36', '0.00', '2,384.56'],
+            ['Materia Prima: Avíos', '312.66', '348.41', '3,075.89', '0.00', '894.21'],
+            ['Mano de Obra', '166.75', '185.82', '1,640.47', '0.00', '476.91'],
+            ['Servicios', '208.44', '232.28', '2,050.59', '0.00', '596.14'],
+          ],
+          indirectRows: [
+            ['Gastos de Fábrica', '162.58', '181.18', '1,599.46', '0.00', '464.99'],
+            ['Mano de Obra', '139.65', '155.62', '1,373.90', '0.00', '399.41'],
+            ['Depreciación', '10.42', '11.61', '102.53', '0.00', '29.81'],
+            ['Administración', '187.60', '209.05', '1,845.53', '0.00', '536.53'],
+            ['Ventas', '62.53', '69.68', '615.18', '0.00', '178.84'],
+          ],
+          periods: {
+            Marzo: {
+              directRows: [
+                ['Materia Prima: Telas', '500.25', '557.46', '4,921.42', '0.00', '1,430.74'],
+                ['Materia Prima: Avíos', '187.60', '209.05', '1,845.53', '0.00', '536.53'],
+                ['Mano de Obra', '100.05', '111.49', '984.28', '0.00', '286.15'],
+                ['Servicios', '125.06', '139.37', '1,230.35', '0.00', '357.68'],
+              ],
+              indirectRows: [
+                ['Gastos de Fábrica', '97.55', '108.71', '959.68', '0.00', '278.99'],
+                ['Mano de Obra', '83.79', '93.37', '824.34', '0.00', '239.65'],
+                ['Depreciación', '6.25', '6.97', '61.52', '0.00', '17.88'],
+                ['Administración', '112.56', '125.43', '1,107.31', '0.00', '321.92'],
+                ['Ventas', '37.52', '41.81', '369.11', '0.00', '107.31'],
+              ],
+            },
+            Abril: {
+              directRows: [
+                ['Materia Prima: Telas', '333.50', '371.64', '3,280.94', '0.00', '953.82'],
+                ['Materia Prima: Avíos', '125.06', '139.37', '1,230.35', '0.00', '357.68'],
+                ['Mano de Obra', '66.70', '74.33', '656.19', '0.00', '190.76'],
+                ['Servicios', '83.38', '92.91', '820.24', '0.00', '238.46'],
+              ],
+              indirectRows: [
+                ['Gastos de Fábrica', '65.03', '72.47', '639.78', '0.00', '186.00'],
+                ['Mano de Obra', '55.86', '62.25', '549.56', '0.00', '159.77'],
+                ['Depreciación', '4.17', '4.65', '41.01', '0.00', '11.92'],
+                ['Administración', '75.04', '83.62', '738.21', '0.00', '214.61'],
+                ['Ventas', '25.01', '27.87', '246.08', '0.00', '71.54'],
+              ],
+            },
+          },
+        },
+      };
+
       function normalizeText(text) {
         return (text || '')
           .toString()
@@ -2317,6 +2921,48 @@
       function parseNumericValue(value) {
         const normalized = (value || '').toString().replace(/,/g, '').match(/-?\d+(?:\.\d+)?/);
         return normalized ? Number.parseFloat(normalized[0]) : null;
+      }
+
+      function formatAmount(value) {
+        return Number(value || 0).toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+
+      function syncCosteoLoadMonthTheme(month) {
+        if (!costeoLoadMonthField) return;
+        const normalizedMonth = ['todo', 'marzo', 'abril'].includes(normalizeText(month))
+          ? normalizeText(month)
+          : 'todo';
+        costeoLoadMonthField.dataset.month = normalizedMonth;
+      }
+
+      function formatLocalDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      function formatDisplayDate(value) {
+        if (!value) return '';
+        const [year, month, day] = value.split('-');
+        return `${day}/${month}/${year}`;
+      }
+
+      function syncSummaryDateRangeDisplay() {
+        if (!summaryDateRangeDisplay || !summaryDateStartFilter || !summaryDateEndFilter) return;
+        summaryDateRangeDisplay.value = `${formatDisplayDate(summaryDateStartFilter.value)} - ${formatDisplayDate(summaryDateEndFilter.value)}`;
+      }
+
+      function setupSummaryDateRange() {
+        if (!summaryDateStartFilter || !summaryDateEndFilter) return;
+        const today = new Date();
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        summaryDateStartFilter.value = formatLocalDate(startOfMonth);
+        summaryDateEndFilter.value = formatLocalDate(today);
+        syncSummaryDateRangeDisplay();
       }
 
       function setupFilterControls(config) {
@@ -2449,6 +3095,7 @@
         costeoTimesView.classList.add('is-hidden');
         costeoDriversView.classList.add('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         detailView.classList.remove('is-hidden');
       }
 
@@ -2459,6 +3106,7 @@
         costeoTimesView.classList.add('is-hidden');
         costeoDriversView.classList.add('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         summaryView.classList.remove('is-hidden');
       }
 
@@ -2471,6 +3119,7 @@
         costeoTimesView.classList.add('is-hidden');
         costeoDriversView.classList.add('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         costDetailView.classList.remove('is-hidden');
         renderCostDetail(pd, selectedStyle);
       }
@@ -2481,6 +3130,7 @@
         costeoTimesView.classList.add('is-hidden');
         costeoDriversView.classList.add('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         detailView.classList.remove('is-hidden');
       }
 
@@ -2744,10 +3394,11 @@
 
       const comparadorGroup = document.getElementById('comparador-group');
       const comparadorToggle = document.querySelector('[data-sidebar-toggle="comparador"]');
-      const comparadorSummaryLink = document.querySelector('[data-nav="comparador"]');
       const costeoGroup = document.getElementById('costeo-group');
       const costeoToggle = document.querySelector('[data-sidebar-toggle="costeo"]');
       const costeoSummaryLink = document.querySelector('[data-nav="costeo"]');
+      const costeoSummarySidebarLink = document.querySelector('[data-nav="costeo-summary"]');
+      const costeoLoadLink = document.querySelector('[data-nav="costeo-load"]');
 
       function setComparadorExpanded(expanded) {
         comparadorGroup.classList.toggle('is-collapsed', !expanded);
@@ -2774,7 +3425,8 @@
         costeoDriversView.classList.add('is-hidden');
         costeoLaborView.classList.add('is-hidden');
         costeoLoadView.classList.add('is-hidden');
-        setActiveSidebar('comparador');
+        costeoLoadDetailView.classList.add('is-hidden');
+        setActiveSidebar('costeo-summary');
       }
 
       function openCosteoView() {
@@ -2785,6 +3437,7 @@
         costeoDriversView.classList.add('is-hidden');
         costeoLaborView.classList.add('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         costeoView.classList.remove('is-hidden');
         setActiveSidebar('costeo');
       }
@@ -2798,6 +3451,7 @@
         costeoLaborView.classList.add('is-hidden');
         costeoTimesView.classList.remove('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         setActiveSidebar('costeo');
       }
 
@@ -2810,6 +3464,7 @@
         costeoDriversView.classList.remove('is-hidden');
         costeoLaborView.classList.add('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         setActiveSidebar('costeo');
       }
 
@@ -2822,6 +3477,7 @@
         costeoDriversView.classList.add('is-hidden');
         costeoLaborView.classList.remove('is-hidden');
         costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.add('is-hidden');
         setActiveSidebar('costeo');
       }
 
@@ -2834,7 +3490,103 @@
         costeoDriversView.classList.add('is-hidden');
         costeoLaborView.classList.add('is-hidden');
         costeoLoadView.classList.remove('is-hidden');
-        setActiveSidebar('costeo');
+        costeoLoadDetailView.classList.add('is-hidden');
+        setActiveSidebar('costeo-load');
+      }
+
+      function renderCosteoLoadDetail(op, month = currentCosteoLoadMonth) {
+        const data = costeoLoadDetailDataset[op] || costeoLoadDetailDataset['OP 1'];
+        const selectedMonth = data.periods && Object.prototype.hasOwnProperty.call(data.periods, month)
+          ? month
+          : 'Todo';
+        const monthData = selectedMonth !== 'Todo' && data.periods && data.periods[selectedMonth]
+          ? data.periods[selectedMonth]
+          : data;
+        const directData = Array.isArray(monthData.directRows) ? monthData.directRows : [];
+        const indirectData = Array.isArray(monthData.indirectRows) ? monthData.indirectRows : [];
+        const totals = [0, 0, 0, 0, 0];
+
+        [...directData, ...indirectData].forEach((row) => {
+          row.slice(1).forEach((value, index) => {
+            totals[index] += parseNumericValue(value) || 0;
+          });
+        });
+        const grandTotal = totals.reduce((sum, value) => sum + value, 0);
+
+        currentCosteoLoadOp = op;
+        currentCosteoLoadMonth = selectedMonth;
+        if (costeoLoadMonthFilter) {
+          costeoLoadMonthFilter.value = selectedMonth;
+        }
+        if (costeoLoadMonthTotal) {
+          costeoLoadMonthTotal.textContent = formatAmount(grandTotal);
+        }
+        syncCosteoLoadMonthTheme(selectedMonth);
+
+        costeoLoadDetailSummaryBody.innerHTML = `
+          <tr>
+            <td>${data.summary.op}</td>
+            <td>${data.summary.pd}</td>
+            <td>${data.summary.estilo}</td>
+            <td>${data.summary.descripcion}</td>
+            <td>${data.summary.cantPlaneada}</td>
+            <td>${data.summary.cantReal}</td>
+            <td>${data.summary.costoTotal}</td>
+            <td>${data.summary.costoUnitario}</td>
+            <td><span class="status good">${data.summary.estado}</span></td>
+          </tr>
+        `;
+
+        const directRows = directData.map((row, index) => `
+          <tr>
+            ${index === 0 ? '<td class="costeo-load-type-cell costeo-load-type-direct" rowspan="' + directData.length + '">Directos</td>' : ''}
+            <td class="costeo-load-category">${row[0]}</td>
+            <td class="costeo-load-num">${row[1]}</td>
+            <td class="costeo-load-num">${row[2]}</td>
+            <td class="costeo-load-num">${row[3]}</td>
+            <td class="costeo-load-num">${row[4]}</td>
+            <td class="costeo-load-num">${row[5]}</td>
+          </tr>
+        `).join('');
+
+        const indirectRows = indirectData.map((row, index) => `
+          <tr>
+            ${index === 0 ? '<td class="costeo-load-type-cell costeo-load-type-indirect" rowspan="' + indirectData.length + '">Indirectos</td>' : ''}
+            <td class="costeo-load-category">${row[0]}</td>
+            <td class="costeo-load-num">${row[1]}</td>
+            <td class="costeo-load-num">${row[2]}</td>
+            <td class="costeo-load-num">${row[3]}</td>
+            <td class="costeo-load-num">${row[4]}</td>
+            <td class="costeo-load-num">${row[5]}</td>
+          </tr>
+        `).join('');
+
+        costeoLoadDetailBreakdownBody.innerHTML = `${directRows}${indirectRows}`;
+        costeoLoadDetailBreakdownFooter.innerHTML = `
+          <tr>
+            <td></td>
+            <td class="costeo-load-total-label">TOTALES ($)</td>
+            <td>${formatAmount(totals[0])}</td>
+            <td>${formatAmount(totals[1])}</td>
+            <td>${formatAmount(totals[2])}</td>
+            <td>${formatAmount(totals[3])}</td>
+            <td>${formatAmount(totals[4])}</td>
+          </tr>
+        `;
+      }
+
+      function openCosteoLoadDetailView(op) {
+        summaryView.classList.add('is-hidden');
+        detailView.classList.add('is-hidden');
+        costDetailView.classList.add('is-hidden');
+        costeoView.classList.add('is-hidden');
+        costeoTimesView.classList.add('is-hidden');
+        costeoDriversView.classList.add('is-hidden');
+        costeoLaborView.classList.add('is-hidden');
+        costeoLoadView.classList.add('is-hidden');
+        costeoLoadDetailView.classList.remove('is-hidden');
+        renderCosteoLoadDetail(op, currentCosteoLoadMonth);
+        setActiveSidebar('costeo-load');
       }
 
       comparadorToggle.addEventListener('click', (event) => {
@@ -2843,10 +3595,10 @@
         setComparadorExpanded(!expanded);
       });
 
-      comparadorSummaryLink.addEventListener('click', (event) => {
+      costeoSummarySidebarLink.addEventListener('click', (event) => {
         event.preventDefault();
         openSummaryView();
-        setComparadorExpanded(true);
+        setCosteoExpanded(true);
       });
 
       costeoToggle.addEventListener('click', (event) => {
@@ -2861,10 +3613,30 @@
         setCosteoExpanded(true);
       });
 
+      costeoLoadLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        openCosteoLoadView();
+        setCosteoExpanded(true);
+      });
+
+      costeoLoadOpLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          openCosteoLoadDetailView(link.dataset.op || 'OP 1');
+          setCosteoExpanded(true);
+        });
+      });
+
+      if (costeoLoadMonthFilter) {
+        costeoLoadMonthFilter.addEventListener('change', (event) => {
+          renderCosteoLoadDetail(currentCosteoLoadOp || 'OP 1', event.target.value);
+        });
+      }
+
       document.querySelectorAll('.costeo-table-link').forEach((link) => {
         link.addEventListener('click', (event) => {
           const target = link.dataset.costeoTarget;
-          if (target !== 'times' && target !== 'drivers' && target !== 'labor' && target !== 'load') return;
+          if (target !== 'times' && target !== 'drivers' && target !== 'labor') return;
           event.preventDefault();
           if (target === 'times') {
             openCosteoTimesView();
@@ -2872,8 +3644,6 @@
             openCosteoDriversView();
           } else if (target === 'labor') {
             openCosteoLaborView();
-          } else {
-            openCosteoLoadView();
           }
           setCosteoExpanded(true);
         });
@@ -2903,6 +3673,37 @@
         setCosteoExpanded(true);
       });
 
+      if (backToCosteoLoadDetail) {
+        backToCosteoLoadDetail.addEventListener('click', (event) => {
+          event.preventDefault();
+          openCosteoLoadView();
+          setCosteoExpanded(true);
+        });
+      }
+
+      if (summaryDateRangeDisplay && summaryDateRangePanel) {
+        summaryDateRangeDisplay.addEventListener('click', () => {
+          summaryDateRangePanel.classList.toggle('is-hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+          const rangeControl = event.target.closest('.date-range-control');
+          if (!rangeControl) {
+            summaryDateRangePanel.classList.add('is-hidden');
+          }
+        });
+      }
+
+      [summaryDateStartFilter, summaryDateEndFilter].forEach((dateInput) => {
+        if (!dateInput) return;
+        dateInput.addEventListener('change', () => {
+          if (summaryDateStartFilter.value && summaryDateEndFilter.value && summaryDateStartFilter.value > summaryDateEndFilter.value) {
+            summaryDateEndFilter.value = summaryDateStartFilter.value;
+          }
+          syncSummaryDateRangeDisplay();
+        });
+      });
+
       detailLinks.forEach((link) => {
         link.addEventListener('click', (event) => {
           event.preventDefault();
@@ -2930,6 +3731,8 @@
       });
       backToSummary.addEventListener('click', closeDetailView);
       backToDetail.addEventListener('click', closeCostDetailView);
+
+      setupSummaryDateRange();
 
       openSummaryView();
       setComparadorExpanded(true);
