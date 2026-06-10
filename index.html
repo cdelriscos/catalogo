@@ -523,6 +523,33 @@
       width: 100%;
     }
 
+    .costeo-load-toolbar-right {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .costeo-load-toolbar-right .filter-wrap {
+      display: grid;
+      grid-template-columns: 18px 70px 274px auto;
+      align-items: center;
+      column-gap: 10px;
+    }
+
+    .costeo-load-toolbar-right .filters-popover,
+    .costeo-load-toolbar-right .date-range-control {
+      width: 274px;
+      margin-left: 0;
+    }
+
+    .costeo-load-toolbar-right .select {
+      width: 100%;
+    }
+
+    .costeo-load-value-row .value-input {
+      width: 170px;
+    }
+
     .value-field {
       display: inline-flex;
       align-items: center;
@@ -758,6 +785,14 @@
       font-size: 13px;
       font-weight: 700;
       white-space: nowrap;
+    }
+
+    .costeo-load-card tbody tr.is-projected {
+      background: #fff9b8;
+    }
+
+    .costeo-load-card tbody tr.is-projected:hover {
+      background: #fff5a3;
     }
 
     .costeo-load-card tbody td {
@@ -1036,8 +1071,9 @@
     }
 
     .costeo-labor-card table {
-      min-width: 1380px;
+      min-width: 1220px;
       border-collapse: collapse;
+      table-layout: fixed;
     }
 
     .costeo-labor-card thead th {
@@ -1051,7 +1087,7 @@
     }
 
     .costeo-labor-card tbody td {
-      padding: 9px 14px;
+      padding: 9px 16px;
       border-bottom: 1px solid #e8edf2;
       color: #2f3d4b;
       font-size: 13px;
@@ -1066,10 +1102,54 @@
       border-bottom: 0;
     }
 
-    .costeo-labor-month-current {
-      background: #f7e7a6;
+    .costeo-labor-card thead th:nth-child(n + 4),
+    .costeo-labor-card tbody tr:has(.costeo-labor-stage) td:nth-child(n + 4),
+    .costeo-labor-card tbody tr:not(:has(.costeo-labor-stage)):not(.costeo-labor-total) td:nth-child(n + 3),
+    .costeo-labor-card tbody tr.costeo-labor-total td:nth-child(n + 2) {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      padding-right: 18px;
+    }
+
+    .costeo-labor-card thead th:nth-child(2),
+    .costeo-labor-card thead th:nth-child(3) {
+      text-align: left;
+    }
+
+    .costeo-labor-card tbody tr:has(.costeo-labor-stage) td:nth-child(2),
+    .costeo-labor-card tbody tr:has(.costeo-labor-stage) td:nth-child(3),
+    .costeo-labor-card tbody tr:not(:has(.costeo-labor-stage)):not(.costeo-labor-total) td:nth-child(1),
+    .costeo-labor-card tbody tr:not(:has(.costeo-labor-stage)):not(.costeo-labor-total) td:nth-child(2) {
+      text-align: left;
+      padding-left: 16px;
+    }
+
+    .costeo-labor-stage {
       color: #21303e;
       font-weight: 700;
+      vertical-align: middle;
+      background: #f8fbfd;
+      border-right: 1px solid #e1e7ee;
+    }
+
+    .costeo-labor-total td {
+      background: #f6f9fc;
+      color: #21303e;
+      font-weight: 700;
+      border-top: 1px solid #cfd8e2;
+    }
+
+    .costeo-labor-total-label {
+      color: #0050b3;
+      text-align: left !important;
+    }
+
+    .costeo-labor-note {
+      border-top: 1px solid #edf1f5;
+      color: #4f5963;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 18px 14px;
     }
 
     .style-summary-link:hover {
@@ -1747,7 +1827,6 @@
                     <th class="actions-cell"></th>
                     <th>PD</th>
                     <th>Estilos</th>
-                    <th>Piezas</th>
                     <th>Cliente</th>
                     <th>Cant. Sol</th>
                     <th>Cant. Cort</th>
@@ -1770,7 +1849,6 @@
                     <td></td>
                     <td>PD-1234</td>
                     <td>Est1, Est2, Est3</td>
-                    <td>5</td>
                     <td>Petite Plume</td>
                     <td>1000.00</td>
                     <td>990.00</td>
@@ -1791,7 +1869,6 @@
                     <td></td>
                     <td>PD-1235</td>
                     <td>Est1, Est2, Est3, Est4, Est5</td>
-                    <td>7</td>
                     <td>Carter's</td>
                     <td>1550.00</td>
                     <td>1500.00</td>
@@ -1812,7 +1889,6 @@
                     <td></td>
                     <td>PD-1236</td>
                     <td>Est1, Est2, Est3</td>
-                    <td>2</td>
                     <td>OshKosh</td>
                     <td>800.00</td>
                     <td>800.00</td>
@@ -1905,7 +1981,6 @@
                     <th class="actions-cell"></th>
                     <th>PD</th>
                     <th>Estilos</th>
-                    <th>Piezas</th>
                     <th>Cliente</th>
                     <th>Cant. Sol</th>
                     <th>Cant. Cort</th>
@@ -1964,8 +2039,7 @@
                     <th>Cliente</th>
                     <th>Nro. PD</th>
                     <th>Estilo</th>
-                    <th>FOB</th>
-                    <th>Nota</th>
+                    <th>Costo Total</th>
                     <th>Acción</th>
                   </tr>
                 </thead>
@@ -2011,11 +2085,6 @@
                   </tr>
                   <tr>
                     <td>Sección: 2</td>
-                    <td>Drivers Costos Indirectos por Área - Periodo</td>
-                    <td><a class="action-link costeo-table-link" href="#" data-costeo-target="drivers">Ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Sección: 3</td>
                     <td>Mano de Obra Directa y Costos Indirectos de Fabricación</td>
                     <td><a class="action-link costeo-table-link" href="#" data-costeo-target="labor">Ver</a></td>
                   </tr>
@@ -2057,33 +2126,31 @@
                 <thead>
                   <tr>
                     <th>Prenda</th>
-                    <th>Piezas</th>
                     <th>Minutos Totales</th>
-                    <th>Corte</th>
-                    <th>Habilitado</th>
+                    <th>Corte y Habilitado</th>
                     <th>Costura</th>
-                    <th>Estampado</th>
+                    <th>Otros</th>
                     <th>Acabado</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>BEBECRECE</td><td>1</td><td>45.28</td><td>3.01</td><td>2.01</td><td>30.10</td><td></td><td>10.16</td></tr>
-                  <tr><td>BEBECRECE 2 PZAS</td><td>1</td><td>55.82</td><td>3.57</td><td>2.31</td><td>38.14</td><td></td><td>11.80</td></tr>
-                  <tr><td>BODY</td><td>2</td><td>22.97</td><td>0.87</td><td>0.69</td><td>18.00</td><td></td><td>3.41</td></tr>
-                  <tr><td>CAFARENA</td><td>1</td><td>22.96</td><td>1.60</td><td>0.40</td><td>18.00</td><td></td><td>2.96</td></tr>
-                  <tr><td>BATA HOMBRE NAVY</td><td>1</td><td>77.84</td><td>3.57</td><td>2.98</td><td>57.01</td><td></td><td>14.28</td></tr>
-                  <tr><td>GORROS</td><td>1</td><td>11.22</td><td>0.53</td><td>0.19</td><td>9.00</td><td></td><td>1.50</td></tr>
-                  <tr><td>PANTALON</td><td>1</td><td>35.84</td><td>1.31</td><td>0.39</td><td>25.39</td><td>4.36</td><td>4.39</td></tr>
-                  <tr><td>PANTALONETAS</td><td>4</td><td>20.95</td><td>1.50</td><td>0.39</td><td>16.02</td><td></td><td>3.04</td></tr>
-                  <tr><td>PIJAMA 2 PZAS</td><td>1</td><td>52.16</td><td>3.00</td><td>1.50</td><td>33.23</td><td>6.33</td><td>8.00</td></tr>
-                  <tr><td>POLO</td><td>1</td><td>20.97</td><td>0.85</td><td>0.66</td><td>16.80</td><td></td><td>2.66</td></tr>
-                  <tr><td>POLO MC</td><td>3</td><td>25.80</td><td>1.44</td><td>0.32</td><td>15.40</td><td>6.60</td><td>2.04</td></tr>
-                  <tr><td>POLO MANGA LARGA</td><td>1</td><td>27.55</td><td>1.50</td><td>0.39</td><td>18.00</td><td>4.80</td><td>2.86</td></tr>
-                  <tr><td>SHORT</td><td>1</td><td>20.45</td><td>1.22</td><td>0.38</td><td>13.07</td><td>3.20</td><td>2.58</td></tr>
-                  <tr><td>POLO SM DAMA BLANCO</td><td>1</td><td>17.55</td><td>0.86</td><td>0.68</td><td>8.91</td><td></td><td>7.10</td></tr>
-                  <tr><td>TRIPACK POLO</td><td>1</td><td>24.53</td><td>0.85</td><td>0.64</td><td>16.80</td><td></td><td>6.24</td></tr>
-                  <tr><td>VESTIDO</td><td>1</td><td>63.58</td><td>2.63</td><td>1.13</td><td>51.88</td><td></td><td>7.94</td></tr>
-                  <tr><td>ZAPATITO</td><td>1</td><td>14.73</td><td>0.60</td><td>0.19</td><td>12.09</td><td></td><td>1.85</td></tr>
+                  <tr><td>BEBECRECE</td><td>40.26</td><td>5.02</td><td>30.10</td><td></td><td>10.16</td></tr>
+                  <tr><td>BEBECRECE 2 PZAS</td><td>49.94</td><td>5.88</td><td>38.14</td><td></td><td>11.80</td></tr>
+                  <tr><td>BODY</td><td>21.41</td><td>1.56</td><td>18.00</td><td></td><td>3.41</td></tr>
+                  <tr><td>CAFARENA</td><td>20.96</td><td>2.00</td><td>18.00</td><td></td><td>2.96</td></tr>
+                  <tr><td>BATA HOMBRE NAVY</td><td>71.29</td><td>6.55</td><td>57.01</td><td></td><td>14.28</td></tr>
+                  <tr><td>GORROS</td><td>10.50</td><td>0.72</td><td>9.00</td><td></td><td>1.50</td></tr>
+                  <tr><td>PANTALON</td><td>34.14</td><td>1.70</td><td>25.39</td><td>4.36</td><td>4.39</td></tr>
+                  <tr><td>PANTALONETAS</td><td>19.06</td><td>1.89</td><td>16.02</td><td></td><td>3.04</td></tr>
+                  <tr><td>PIJAMA 2 PZAS</td><td>47.66</td><td>4.50</td><td>33.33</td><td>6.33</td><td>8.00</td></tr>
+                  <tr><td>POLO</td><td>19.46</td><td>1.51</td><td>16.80</td><td></td><td>2.66</td></tr>
+                  <tr><td>POLO MC</td><td>24.04</td><td>1.76</td><td>15.40</td><td>6.60</td><td>2.04</td></tr>
+                  <tr><td>POLO MANGA LARGA</td><td>25.66</td><td>1.89</td><td>18.00</td><td>4.80</td><td>2.86</td></tr>
+                  <tr><td>SHORT</td><td>18.85</td><td>1.60</td><td>13.07</td><td>3.20</td><td>2.58</td></tr>
+                  <tr><td>POLO SM DAMA BLANCO</td><td>16.01</td><td>1.54</td><td>8.91</td><td></td><td>7.10</td></tr>
+                  <tr><td>TRIPACK POLO</td><td>23.04</td><td>1.49</td><td>16.80</td><td></td><td>6.24</td></tr>
+                  <tr><td>VESTIDO</td><td>59.82</td><td>3.76</td><td>51.88</td><td></td><td>7.94</td></tr>
+                  <tr><td>ZAPATITO</td><td>13.94</td><td>0.79</td><td>12.09</td><td></td><td>1.85</td></tr>
                 </tbody>
               </table>
             </div>
@@ -2271,109 +2338,301 @@
           <section class="card costeo-labor-card">
             <div class="table-wrap">
               <table>
+                <colgroup>
+                  <col style="width: 180px;">
+                  <col style="width: 110px;">
+                  <col style="width: 190px;">
+                  <col style="width: 130px;">
+                  <col style="width: 130px;">
+                  <col style="width: 130px;">
+                  <col style="width: 130px;">
+                  <col style="width: 130px;">
+                  <col style="width: 130px;">
+                  <col style="width: 130px;">
+                </colgroup>
                 <thead>
                   <tr>
-                    <th>Áreas</th>
-                    <th>Abr 2025</th>
-                    <th>May 2025</th>
-                    <th>Jun 2025</th>
-                    <th>Jul 2025</th>
-                    <th>Ago 2025</th>
-                    <th>Sep 2025</th>
-                    <th>Oct 2025</th>
-                    <th>Nov 2025</th>
-                    <th>Dic 2025</th>
-                    <th>Ene 2026</th>
-                    <th>Feb 2026</th>
-                    <th>Mar 2026</th>
-                    <th class="costeo-labor-month-current">Abr 2026 (Prom)</th>
+                    <th>Etapa</th>
+                    <th>Tipo costo</th>
+                    <th>Categoría</th>
+                    <th>Enero</th>
+                    <th>Febrero</th>
+                    <th>Marzo</th>
+                    <th>Abril</th>
+                    <th>Octubre</th>
+                    <th>Noviembre</th>
+                    <th>Diciembre</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Corte</td>
-                    <td>10,500</td>
-                    <td>11,200</td>
-                    <td>10,800</td>
-                    <td>9,800</td>
-                    <td>10,200</td>
-                    <td>10,600</td>
-                    <td>10,000</td>
-                    <td>9,500</td>
-                    <td>10,000</td>
-                    <td>11,000</td>
-                    <td>9,500</td>
-                    <td>9,000</td>
-                    <td class="costeo-labor-month-current">10,175</td>
+                    <td class="costeo-labor-stage" rowspan="6">Corte y Habilitado</td>
+                    <td>Indirecto</td>
+                    <td>Gastos de Fábrica</td>
+                    <td>3,850.00</td>
+                    <td>3,325.00</td>
+                    <td>3,150.00</td>
+                    <td>3,441.67</td>
+                    <td>3,850.00</td>
+                    <td>3,325.00</td>
+                    <td>3,150.00</td>
                   </tr>
                   <tr>
-                    <td>Habilitado</td>
-                    <td>7,000</td>
-                    <td>6,800</td>
-                    <td>7,200</td>
-                    <td>6,700</td>
-                    <td>6,900</td>
-                    <td>7,100</td>
-                    <td>6,500</td>
-                    <td>6,500</td>
-                    <td>7,500</td>
-                    <td>6,500</td>
-                    <td>8,500</td>
-                    <td>6,500</td>
-                    <td class="costeo-labor-month-current">6,975</td>
+                    <td>Directo</td>
+                    <td>Mano Obra</td>
+                    <td>1,650.00</td>
+                    <td>1,425.00</td>
+                    <td>1,350.00</td>
+                    <td>1,499.17</td>
+                    <td>1,450.00</td>
+                    <td>1,600.00</td>
+                    <td>1,520.00</td>
                   </tr>
                   <tr>
-                    <td>Costura</td>
-                    <td>36,000</td>
-                    <td>38,000</td>
-                    <td>37,000</td>
-                    <td>35,000</td>
-                    <td>36,500</td>
-                    <td>37,500</td>
-                    <td>34,000</td>
-                    <td>38,000</td>
-                    <td>40,000</td>
-                    <td>40,000</td>
-                    <td>36,000</td>
-                    <td>34,000</td>
-                    <td class="costeo-labor-month-current">36,917</td>
+                    <td>Indirecto</td>
+                    <td>Mano Obra</td>
+                    <td>990.00</td>
+                    <td>855.00</td>
+                    <td>810.00</td>
+                    <td>1,180.00</td>
+                    <td>1,650.00</td>
+                    <td>1,425.00</td>
+                    <td>1,350.00</td>
                   </tr>
                   <tr>
-                    <td>Estampado</td>
-                    <td>5,200</td>
-                    <td>5,300</td>
-                    <td>5,400</td>
-                    <td>5,100</td>
-                    <td>5,200</td>
-                    <td>5,300</td>
-                    <td>5,000</td>
-                    <td>5,000</td>
-                    <td>5,000</td>
-                    <td>5,000</td>
-                    <td>6,500</td>
-                    <td>5,000</td>
-                    <td class="costeo-labor-month-current">5,250</td>
+                    <td>Indirecto</td>
+                    <td>Administración</td>
+                    <td>2,310.00</td>
+                    <td>1,995.00</td>
+                    <td>1,890.00</td>
+                    <td>2,065.00</td>
+                    <td>2,310.00</td>
+                    <td>1,995.00</td>
+                    <td>1,890.00</td>
                   </tr>
                   <tr>
-                    <td>Acabado</td>
-                    <td>14,500</td>
-                    <td>14,800</td>
-                    <td>14,200</td>
-                    <td>14,000</td>
-                    <td>13,800</td>
-                    <td>14,300</td>
-                    <td>14,500</td>
-                    <td>12,500</td>
-                    <td>13,500</td>
-                    <td>15,000</td>
-                    <td>14,500</td>
-                    <td>14,500</td>
-                    <td class="costeo-labor-month-current">14,175</td>
+                    <td>Indirecto</td>
+                    <td>Ventas</td>
+                    <td>2,200.00</td>
+                    <td>1,900.00</td>
+                    <td>1,800.00</td>
+                    <td>2,409.17</td>
+                    <td>3,190.00</td>
+                    <td>2,755.00</td>
+                    <td>2,610.00</td>
+                  </tr>
+                  <tr class="costeo-labor-total">
+                    <td class="costeo-labor-total-label" colspan="2">Total Corte y Habilitado US$</td>
+                    <td>11,000.00</td>
+                    <td>9,500.00</td>
+                    <td>9,000.00</td>
+                    <td>9,833.33</td>
+                    <td>11,000.00</td>
+                    <td>9,500.00</td>
+                    <td>9,000.00</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-labor-stage" rowspan="6">Costura</td>
+                    <td>Indirecto</td>
+                    <td>Gastos de Fábrica</td>
+                    <td>14,000.00</td>
+                    <td>12,600.00</td>
+                    <td>11,900.00</td>
+                    <td>9,814.58</td>
+                    <td>5,880.00</td>
+                    <td>7,157.50</td>
+                    <td>7,350.00</td>
+                  </tr>
+                  <tr>
+                    <td>Directo</td>
+                    <td>Mano Obra</td>
+                    <td>6,000.00</td>
+                    <td>5,400.00</td>
+                    <td>5,100.00</td>
+                    <td>5,391.67</td>
+                    <td>5,200.00</td>
+                    <td>5,650.00</td>
+                    <td>5,000.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Mano Obra</td>
+                    <td>3,600.00</td>
+                    <td>3,240.00</td>
+                    <td>3,060.00</td>
+                    <td>3,106.25</td>
+                    <td>2,520.00</td>
+                    <td>3,067.50</td>
+                    <td>3,150.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Administración</td>
+                    <td>8,400.00</td>
+                    <td>7,560.00</td>
+                    <td>7,140.00</td>
+                    <td>5,888.75</td>
+                    <td>3,528.00</td>
+                    <td>4,294.50</td>
+                    <td>4,410.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Ventas</td>
+                    <td>8,000.00</td>
+                    <td>7,200.00</td>
+                    <td>6,800.00</td>
+                    <td>6,482.08</td>
+                    <td>4,872.00</td>
+                    <td>5,930.50</td>
+                    <td>6,090.00</td>
+                  </tr>
+                  <tr class="costeo-labor-total">
+                    <td class="costeo-labor-total-label" colspan="2">Total Costura US$</td>
+                    <td>40,000.00</td>
+                    <td>36,000.00</td>
+                    <td>34,000.00</td>
+                    <td>28,041.67</td>
+                    <td>16,800.00</td>
+                    <td>20,450.00</td>
+                    <td>21,000.00</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-labor-stage" rowspan="6">Otros</td>
+                    <td>Indirecto</td>
+                    <td>Gastos de Fábrica</td>
+                    <td>1,750.00</td>
+                    <td>2,275.00</td>
+                    <td>1,925.00</td>
+                    <td>4,223.33</td>
+                    <td>6,825.00</td>
+                    <td>6,300.00</td>
+                    <td>6,265.00</td>
+                  </tr>
+                  <tr>
+                    <td>Directo</td>
+                    <td>Mano Obra</td>
+                    <td>750.00</td>
+                    <td>975.00</td>
+                    <td>825.00</td>
+                    <td>834.17</td>
+                    <td>700.00</td>
+                    <td>905.00</td>
+                    <td>850.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Mano Obra</td>
+                    <td>450.00</td>
+                    <td>585.00</td>
+                    <td>495.00</td>
+                    <td>1,640.00</td>
+                    <td>2,925.00</td>
+                    <td>2,700.00</td>
+                    <td>2,685.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Administración</td>
+                    <td>1,050.00</td>
+                    <td>1,365.00</td>
+                    <td>1,155.00</td>
+                    <td>2,534.00</td>
+                    <td>4,095.00</td>
+                    <td>3,780.00</td>
+                    <td>3,759.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Ventas</td>
+                    <td>1,000.00</td>
+                    <td>1,300.00</td>
+                    <td>1,100.00</td>
+                    <td>3,244.33</td>
+                    <td>5,655.00</td>
+                    <td>5,220.00</td>
+                    <td>5,191.00</td>
+                  </tr>
+                  <tr class="costeo-labor-total">
+                    <td class="costeo-labor-total-label" colspan="2">Total Otros US$</td>
+                    <td>5,000.00</td>
+                    <td>6,500.00</td>
+                    <td>5,500.00</td>
+                    <td>12,066.67</td>
+                    <td>19,500.00</td>
+                    <td>18,000.00</td>
+                    <td>17,900.00</td>
+                  </tr>
+                  <tr>
+                    <td class="costeo-labor-stage" rowspan="6">Acabado</td>
+                    <td>Indirecto</td>
+                    <td>Gastos de Fábrica</td>
+                    <td>5,250.00</td>
+                    <td>5,075.00</td>
+                    <td>5,022.50</td>
+                    <td>5,422.08</td>
+                    <td>4,725.00</td>
+                    <td>6,300.00</td>
+                    <td>6,160.00</td>
+                  </tr>
+                  <tr>
+                    <td>Directo</td>
+                    <td>Mano Obra</td>
+                    <td>2,250.00</td>
+                    <td>2,175.00</td>
+                    <td>2,152.50</td>
+                    <td>2,177.08</td>
+                    <td>2,135.00</td>
+                    <td>2,200.00</td>
+                    <td>2,150.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Mano Obra</td>
+                    <td>1,350.00</td>
+                    <td>1,305.00</td>
+                    <td>1,291.50</td>
+                    <td>1,885.25</td>
+                    <td>2,025.00</td>
+                    <td>2,700.00</td>
+                    <td>2,640.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Administración</td>
+                    <td>3,150.00</td>
+                    <td>3,045.00</td>
+                    <td>3,013.50</td>
+                    <td>3,253.25</td>
+                    <td>2,835.00</td>
+                    <td>3,780.00</td>
+                    <td>3,696.00</td>
+                  </tr>
+                  <tr>
+                    <td>Indirecto</td>
+                    <td>Ventas</td>
+                    <td>3,000.00</td>
+                    <td>2,900.00</td>
+                    <td>2,870.00</td>
+                    <td>3,834.83</td>
+                    <td>3,915.00</td>
+                    <td>5,220.00</td>
+                    <td>5,104.00</td>
+                  </tr>
+                  <tr class="costeo-labor-total">
+                    <td class="costeo-labor-total-label" colspan="2">Total Acabado US$</td>
+                    <td>15,000.00</td>
+                    <td>14,500.00</td>
+                    <td>14,350.00</td>
+                    <td>15,491.67</td>
+                    <td>13,500.00</td>
+                    <td>18,000.00</td>
+                    <td>17,600.00</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="costeo-drivers-note">Nota: Promedio de los últimos 12 meses: abril 2025 a marzo 2026.</div>
+            <div class="costeo-labor-note">Nota: Promedio de los últimos 12 meses. Los meses sin información fueron ocultados para mantener la lectura de la grilla.</div>
           </section>
         </div>
       </main>
@@ -2395,7 +2654,49 @@
               <button class="btn" type="button">Seleccionar columnas</button>
             </div>
 
-            <div class="toolbar-right">
+            <div class="toolbar-right costeo-load-toolbar-right">
+              <div class="filter-wrap">
+                <span class="filter-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                    <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12 8H5v9.5c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V10Zm-15-4c-.28 0-.5.22-.5.5V8h15V6.5a.5.5 0 0 0-.5-.5h-1.5v1a1 1 0 1 1-2 0V6h-8v1a1 1 0 1 1-2 0V6H4Z"/>
+                  </svg>
+                </span>
+                <span>Fecha</span>
+                <div class="date-range-control" aria-label="Filtro de rango de fecha carga de costos">
+                  <input class="date-range-input" type="text" id="costeo-load-date-range-display" aria-label="Seleccionar rango de fecha carga de costos" readonly />
+                  <div class="date-range-panel is-hidden" id="costeo-load-date-range-panel">
+                    <label>
+                      Inicio
+                      <input class="date-select" type="date" id="costeo-load-date-start-filter" aria-label="Fecha inicial carga de costos">
+                    </label>
+                    <label>
+                      Fin
+                      <input class="date-select" type="date" id="costeo-load-date-end-filter" aria-label="Fecha final carga de costos">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="filter-wrap">
+                <span class="filter-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                    <path d="M3 5h18l-7 8v5l-4 2v-7L3 5z"/>
+                  </svg>
+                </span>
+                <span>Buscar en</span>
+                <div class="filters-popover" aria-label="Campo de búsqueda carga de costos">
+                  <select class="select" id="costeo-load-search-field" aria-label="Seleccionar campo de búsqueda carga de costos">
+                    <option value="">Seleccionar</option>
+                    <option value="order">Orden (OP)</option>
+                    <option value="style">Estilo</option>
+                    <option value="pd">PD</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-wrap costeo-load-value-row is-hidden" id="costeo-load-value-field">
+                <span class="filter-icon" aria-hidden="true"></span>
+                <span class="value-label">Valor</span>
+                <input class="value-input" type="text" id="costeo-load-search-value" aria-label="Valor de búsqueda carga de costos">
+              </div>
               <a class="costeo-return-link" id="back-to-costeo-load" href="#">
                 <span>Regresar</span>
                 <span class="costeo-return-arrow" aria-hidden="true">↩</span>
@@ -2414,50 +2715,66 @@
                     <th>Descripción</th>
                     <th>Cant. Plan</th>
                     <th>Cant. Real</th>
-                    <th>Corte ($)</th>
-                    <th>Habilitado ($)</th>
+                    <th>Corte y Habilitado ($)</th>
                     <th>Costura ($)</th>
-                    <th>Estampado ($)</th>
+                    <th>Otros ($)</th>
                     <th>Acabado ($)</th>
                     <th>Costo Total</th>
                     <th>Costo Unitario</th>
+                    <th>Fuente</th>
                     <th>Estado</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr data-status="finalizado" data-source="Definitivo" data-date="2026-06-01" data-month="2026-06" data-order="OP 1" data-style="1" data-pd="PD-01234">
                     <td><a class="costeo-load-op-link" href="#" data-op="OP 1">OP 1</a></td>
                     <td>PD-01234</td>
                     <td>1</td>
                     <td>BATA HOMBRE NAVY</td>
                     <td>1,000</td>
                     <td>1,005</td>
-                    <td>2,084.39</td>
-                    <td>2,322.76</td>
                     <td>20,505.90</td>
+                    <td>2,084.39</td>
                     <td>0.00</td>
                     <td>5,961.40</td>
-                    <td>30,874.45</td>
-                    <td>30.72</td>
+                    <td>28,551.69</td>
+                    <td>28.41</td>
+                    <td>Definitivo</td>
                     <td>finalizado</td>
                   </tr>
-                  <tr>
+                  <tr class="is-projected" data-status="finalizado" data-source="Proyectado" data-date="2026-06-01" data-month="2026-06" data-order="OP 1" data-style="1" data-pd="PD-01234">
+                    <td>OP 1</td>
+                    <td>PD-01234</td>
+                    <td>1</td>
+                    <td>BATA HOMBRE NAVY</td>
+                    <td>1,000</td>
+                    <td>1,005</td>
+                    <td>15,000.00</td>
+                    <td>8,500.00</td>
+                    <td>0.00</td>
+                    <td>6,000.00</td>
+                    <td>29,500.00</td>
+                    <td>28.41</td>
+                    <td>Proyectado</td>
+                    <td>finalizado</td>
+                  </tr>
+                  <tr data-status="en proceso" data-source="Definitivo" data-date="2026-06-01" data-month="2026-06" data-order="OP 3" data-style="2" data-pd="PD-01234">
                     <td>OP 3</td>
                     <td>PD-01234</td>
                     <td>2</td>
                     <td>POLO MANGA LARGA</td>
                     <td>1,700</td>
                     <td>1,708</td>
-                    <td>4,876.30</td>
-                    <td>0.00</td>
                     <td>18,263.10</td>
+                    <td>4,876.30</td>
                     <td>0.00</td>
                     <td>2,117.07</td>
                     <td>27,261.85</td>
                     <td>15.96</td>
+                    <td>Definitivo</td>
                     <td>en proceso</td>
                   </tr>
-                  <tr>
+                  <tr data-status="finalizado" data-source="Definitivo" data-date="2026-06-01" data-month="2026-06" data-order="OP 7" data-style="3" data-pd="PD-01234">
                     <td>OP 7</td>
                     <td>PD-01234</td>
                     <td>3</td>
@@ -2468,12 +2785,12 @@
                     <td>0.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
-                    <td>0.00</td>
                     <td>3,599.57</td>
                     <td>2.39</td>
+                    <td>Definitivo</td>
                     <td>finalizado</td>
                   </tr>
-                  <tr>
+                  <tr data-status="en proceso" data-source="Definitivo" data-date="2026-06-01" data-month="2026-06" data-order="OP 5" data-style="1" data-pd="PD-01235">
                     <td>OP 5</td>
                     <td>PD-01235</td>
                     <td>1</td>
@@ -2482,11 +2799,11 @@
                     <td>4,020</td>
                     <td>28,521.90</td>
                     <td>0.00</td>
-                    <td>0.00</td>
                     <td>106.04</td>
                     <td>0.00</td>
                     <td>28,627.94</td>
                     <td>7.12</td>
+                    <td>Definitivo</td>
                     <td>en proceso</td>
                   </tr>
                 </tbody>
@@ -2588,10 +2905,10 @@
                   <tr>
                     <th>Tipo</th>
                     <th>Categoría</th>
-                    <th>Corte ($)</th>
-                    <th>Habilitado ($)</th>
+                    <th>Totales ($)</th>
+                    <th>Corte y Habilitado ($)</th>
                     <th>Costura ($)</th>
-                    <th>Estampado ($)</th>
+                    <th>Otros ($)</th>
                     <th>Acabado ($)</th>
                   </tr>
                 </thead>
@@ -2715,6 +3032,13 @@
       const costeoLoadDetailSummaryBody = document.getElementById('costeo-load-detail-summary-body');
       const costeoLoadDetailBreakdownBody = document.getElementById('costeo-load-detail-breakdown-body');
       const costeoLoadDetailBreakdownFooter = document.getElementById('costeo-load-detail-breakdown-footer');
+      const costeoLoadDateRangeDisplay = document.getElementById('costeo-load-date-range-display');
+      const costeoLoadDateRangePanel = document.getElementById('costeo-load-date-range-panel');
+      const costeoLoadDateStartFilter = document.getElementById('costeo-load-date-start-filter');
+      const costeoLoadDateEndFilter = document.getElementById('costeo-load-date-end-filter');
+      const costeoLoadSearchField = document.getElementById('costeo-load-search-field');
+      const costeoLoadValueField = document.getElementById('costeo-load-value-field');
+      const costeoLoadSearchValue = document.getElementById('costeo-load-search-value');
       const costeoLoadMonthFilter = document.getElementById('costeo-load-month-filter');
       const costeoLoadMonthTotal = document.getElementById('costeo-load-month-total');
       const costeoLoadMonthField = document.querySelector('.costeo-load-detail-monthfield');
@@ -2758,9 +3082,9 @@
       const costDetailDatasets = {
         'PD-1234': {
           summaryRows: [
-            { cliente: 'Petite Plume', pd: 'PD 1234', estilo: 'Estilo 1', fob: '10.00', note: '' },
-            { cliente: '', pd: '', estilo: 'Estilo 2', fob: '12.00', note: '1 pieza' },
-            { cliente: '', pd: '', estilo: 'Estilo 3', fob: '26.00', note: '2 piezas' },
+            { cliente: 'Petite Plume', pd: 'PD 1234', estilo: 'Estilo 1', fob: '10.00' },
+            { cliente: '', pd: '', estilo: 'Estilo 2', fob: '12.00' },
+            { cliente: '', pd: '', estilo: 'Estilo 3', fob: '26.00' },
           ],
           styles: [
             {
@@ -2862,48 +3186,51 @@
             estado: 'finalizado',
           },
           directRows: [
-            ['Materia Prima: Telas', '833.76', '929.10', '8,202.36', '0.00', '2,384.56'],
-            ['Materia Prima: Avíos', '312.66', '348.41', '3,075.89', '0.00', '894.21'],
-            ['Mano de Obra', '166.75', '185.82', '1,640.47', '0.00', '476.91'],
-            ['Servicios', '208.44', '232.28', '2,050.59', '0.00', '596.14'],
+            ['Materia Prima: Telas', '8,202.36', '8,202.36', '0.00', '0.00', '0.00'],
+            ['Materia Prima: Avíos', '6,031.17', '3,075.89', '712.66', '848.41', '1,394.21'],
+            ['Mano de Obra', '3,832.82', '1,640.47', '600.51', '614.92', '976.91'],
+            ['Servicios', '4,472.01', '2,050.59', '208.44', '232.28', '1,980.70'],
           ],
           indirectRows: [
-            ['Gastos de Fábrica', '162.58', '181.18', '1,599.46', '0.00', '464.99'],
-            ['Mano de Obra', '139.65', '155.62', '1,373.90', '0.00', '399.41'],
-            ['Depreciación', '10.42', '11.61', '102.53', '0.00', '29.81'],
-            ['Administración', '187.60', '209.05', '1,845.53', '0.00', '536.53'],
-            ['Ventas', '62.53', '69.68', '615.18', '0.00', '178.84'],
+            ['Gastos de Fábrica', '2,408.21', '1,599.46', '162.58', '181.18', '464.99'],
+            ['Mano de Obra', '2,068.59', '1,373.90', '139.65', '155.62', '399.41'],
+            ['Depreciación', '154.37', '102.53', '10.42', '11.61', '29.81'],
+            ['Administración', '2,778.70', '1,845.53', '187.60', '209.05', '536.53'],
+            ['Ventas', '926.23', '615.18', '62.53', '69.68', '178.84'],
           ],
+          totals: ['30,874.45', '20,505.90', '2,084.39', '2,322.76', '5,961.40'],
           periods: {
             Marzo: {
               directRows: [
-                ['Materia Prima: Telas', '500.25', '557.46', '4,921.42', '0.00', '1,430.74'],
-                ['Materia Prima: Avíos', '187.60', '209.05', '1,845.53', '0.00', '536.53'],
-                ['Mano de Obra', '100.05', '111.49', '984.28', '0.00', '286.15'],
-                ['Servicios', '125.06', '139.37', '1,230.35', '0.00', '357.68'],
+                ['Materia Prima: Telas', '4,921.42', '4,921.42', '0.00', '0.00', '0.00'],
+                ['Materia Prima: Avíos', '4,178.70', '1,845.53', '587.60', '709.05', '1,036.53'],
+                ['Mano de Obra', '2,844.83', '984.28', '533.81', '540.59', '786.15'],
+                ['Servicios', '3,237.03', '1,230.35', '125.06', '139.37', '1,742.24'],
               ],
               indirectRows: [
-                ['Gastos de Fábrica', '97.55', '108.71', '959.68', '0.00', '278.99'],
-                ['Mano de Obra', '83.79', '93.37', '824.34', '0.00', '239.65'],
-                ['Depreciación', '6.25', '6.97', '61.52', '0.00', '17.88'],
-                ['Administración', '112.56', '125.43', '1,107.31', '0.00', '321.92'],
-                ['Ventas', '37.52', '41.81', '369.11', '0.00', '107.31'],
+                ['Gastos de Fábrica', '1,444.92', '959.68', '97.55', '108.71', '278.99'],
+                ['Mano de Obra', '1,241.15', '824.34', '83.79', '93.37', '239.65'],
+                ['Depreciación', '92.62', '61.52', '6.25', '6.97', '17.88'],
+                ['Administración', '1,667.22', '1,107.32', '112.56', '125.43', '321.92'],
+                ['Ventas', '555.74', '369.11', '37.52', '41.81', '107.31'],
               ],
+              totals: ['20,183.64', '12,303.54', '1,584.14', '1,765.29', '4,530.66'],
             },
             Abril: {
               directRows: [
-                ['Materia Prima: Telas', '333.50', '371.64', '3,280.94', '0.00', '953.82'],
-                ['Materia Prima: Avíos', '125.06', '139.37', '1,230.35', '0.00', '357.68'],
-                ['Mano de Obra', '66.70', '74.33', '656.19', '0.00', '190.76'],
-                ['Servicios', '83.38', '92.91', '820.24', '0.00', '238.46'],
+                ['Materia Prima: Telas', '3,280.94', '3,280.94', '0.00', '0.00', '0.00'],
+                ['Materia Prima: Avíos', '3,252.47', '1,230.35', '525.06', '639.37', '857.68'],
+                ['Mano de Obra', '2,350.84', '656.19', '500.46', '503.43', '690.76'],
+                ['Servicios', '2,619.54', '820.24', '83.38', '92.91', '1,623.02'],
               ],
               indirectRows: [
-                ['Gastos de Fábrica', '65.03', '72.47', '639.78', '0.00', '186.00'],
-                ['Mano de Obra', '55.86', '62.25', '549.56', '0.00', '159.77'],
-                ['Depreciación', '4.17', '4.65', '41.01', '0.00', '11.92'],
-                ['Administración', '75.04', '83.62', '738.21', '0.00', '214.61'],
-                ['Ventas', '25.01', '27.87', '246.08', '0.00', '71.54'],
+                ['Gastos de Fábrica', '963.28', '639.78', '65.03', '72.47', '186.00'],
+                ['Mano de Obra', '827.44', '549.56', '55.86', '62.25', '159.77'],
+                ['Depreciación', '61.75', '41.01', '4.17', '4.65', '11.92'],
+                ['Administración', '1,111.48', '738.21', '75.04', '83.62', '214.61'],
+                ['Ventas', '370.49', '246.07', '25.01', '27.87', '71.54'],
               ],
+              totals: ['14,838.23', '8,202.36', '1,334.01', '1,486.56', '3,815.30'],
             },
           },
         },
@@ -2956,6 +3283,11 @@
         summaryDateRangeDisplay.value = `${formatDisplayDate(summaryDateStartFilter.value)} - ${formatDisplayDate(summaryDateEndFilter.value)}`;
       }
 
+      function syncCosteoLoadDateRangeDisplay() {
+        if (!costeoLoadDateRangeDisplay || !costeoLoadDateStartFilter || !costeoLoadDateEndFilter) return;
+        costeoLoadDateRangeDisplay.value = `${formatDisplayDate(costeoLoadDateStartFilter.value)} - ${formatDisplayDate(costeoLoadDateEndFilter.value)}`;
+      }
+
       function setupSummaryDateRange() {
         if (!summaryDateStartFilter || !summaryDateEndFilter) return;
         const today = new Date();
@@ -2963,6 +3295,45 @@
         summaryDateStartFilter.value = formatLocalDate(startOfMonth);
         summaryDateEndFilter.value = formatLocalDate(today);
         syncSummaryDateRangeDisplay();
+      }
+
+      function applyCosteoLoadFilters() {
+        const rows = Array.from(document.querySelectorAll('#costeo-load-view .costeo-load-card tbody tr'));
+        const startDate = costeoLoadDateStartFilter?.value || '';
+        const endDate = costeoLoadDateEndFilter?.value || '';
+        const searchField = costeoLoadSearchField?.value || '';
+        const searchValue = normalizeText(costeoLoadSearchValue?.value || '');
+
+        rows.forEach((row) => {
+          const rowDate = row.dataset.date || '';
+          const matchesDate = (!startDate || rowDate >= startDate) && (!endDate || rowDate <= endDate);
+          const rowValue = normalizeText(row.dataset[searchField] || '');
+          const matchesSearch = !searchField || !searchValue || rowValue.includes(searchValue);
+          row.hidden = !matchesDate || !matchesSearch;
+        });
+      }
+
+      function syncCosteoLoadSearchVisibility() {
+        if (!costeoLoadSearchField || !costeoLoadValueField) return;
+        const hasField = Boolean(costeoLoadSearchField.value);
+        costeoLoadValueField.classList.toggle('is-hidden', !hasField);
+        if (!hasField && costeoLoadSearchValue) {
+          costeoLoadSearchValue.value = '';
+        }
+      }
+
+      function setupCosteoLoadFilters() {
+        if (!costeoLoadDateStartFilter || !costeoLoadDateEndFilter) {
+          applyCosteoLoadFilters();
+          return;
+        }
+        const today = new Date();
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        costeoLoadDateStartFilter.value = formatLocalDate(startOfMonth);
+        costeoLoadDateEndFilter.value = formatLocalDate(today);
+        syncCosteoLoadDateRangeDisplay();
+        syncCosteoLoadSearchVisibility();
+        applyCosteoLoadFilters();
       }
 
       function setupFilterControls(config) {
@@ -2977,13 +3348,13 @@
         const onRowsChanged = typeof config.onRowsChanged === 'function' ? config.onRowsChanged : () => {};
         const textColumns = {
           'Programa de Despacho': 1,
-          Cliente: 4,
+          Cliente: 3,
           Estilo: 2,
         };
         const numericColumns = {
-          Costo: 13,
-          'Precio Venta': 14,
-          Margen: 15,
+          Costo: 12,
+          'Precio Venta': 13,
+          Margen: 14,
         };
 
         function applyStateFilter() {
@@ -3138,7 +3509,7 @@
         currentDetailPd = pd;
         const data = detailDatasets[pd] || detailDatasets['PD-1234'];
         detailBody.innerHTML = data.rows.map((row) => {
-          const [estilo, piezas, cliente, cantSol, cantCort, cantVend, costDir, costInd, gAdmin, gVentas, merma, costo, pVenta, margen, pctMargen, estado] = row;
+          const [estilo, , cliente, cantSol, cantCort, cantVend, costDir, costInd, gAdmin, gVentas, merma, costo, pVenta, margen, pctMargen, estado] = row;
           const normalizedStatus = normalizeText(estado);
           const statusClass = normalizedStatus === 'bueno' ? 'good' : normalizedStatus === 'medio' ? 'medium' : 'poor';
           const estadoLabel = estado;
@@ -3148,7 +3519,6 @@
               <td></td>
               <td>${pd}</td>
               <td>${estilo}</td>
-              <td>${piezas}</td>
               <td>${cliente}</td>
               <td>${cantSol}</td>
               <td>${cantCort}</td>
@@ -3182,7 +3552,6 @@
             <td>${row.pd}</td>
             <td>${row.estilo}</td>
             <td>${row.fob}</td>
-            <td>${row.note}</td>
             <td><a class="action-link style-summary-link cost-summary-link" href="#" data-style="${row.estilo}">Ver</a></td>
           </tr>
         `).join('');
@@ -3320,7 +3689,7 @@
                       <td class="style-summary-total style-summary-value">${summary.totalLabel}</td>
                     </tr>
                     <tr>
-                      <td class="style-summary-label">FOB Objetivo</td>
+                      <td class="style-summary-label">Costo Total Objetivo</td>
                       <td class="style-summary-value">${summary.fobObjective}</td>
                     </tr>
                     <tr>
@@ -3344,9 +3713,9 @@
         const visibleRows = Array.from(detailBody.querySelectorAll('tr')).filter((row) => !row.hidden);
         const totals = visibleRows.reduce((acc, row) => {
           const cells = row.querySelectorAll('td');
-          const sol = parseNumericValue(cells[5]?.textContent || '');
-          const cort = parseNumericValue(cells[6]?.textContent || '');
-          const vend = parseNumericValue(cells[7]?.textContent || '');
+          const sol = parseNumericValue(cells[4]?.textContent || '');
+          const cort = parseNumericValue(cells[5]?.textContent || '');
+          const vend = parseNumericValue(cells[6]?.textContent || '');
 
           acc[0] += sol || 0;
           acc[1] += cort || 0;
@@ -3356,7 +3725,6 @@
 
         detailFooter.innerHTML = `
           <tr>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -3511,7 +3879,7 @@
             totals[index] += parseNumericValue(value) || 0;
           });
         });
-        const grandTotal = totals.reduce((sum, value) => sum + value, 0);
+        const displayTotals = Array.isArray(monthData.totals) ? monthData.totals : totals.map(formatAmount);
 
         currentCosteoLoadOp = op;
         currentCosteoLoadMonth = selectedMonth;
@@ -3519,7 +3887,7 @@
           costeoLoadMonthFilter.value = selectedMonth;
         }
         if (costeoLoadMonthTotal) {
-          costeoLoadMonthTotal.textContent = formatAmount(grandTotal);
+          costeoLoadMonthTotal.textContent = displayTotals[0] || formatAmount(totals[0]);
         }
         syncCosteoLoadMonthTheme(selectedMonth);
 
@@ -3566,11 +3934,11 @@
           <tr>
             <td></td>
             <td class="costeo-load-total-label">TOTALES ($)</td>
-            <td>${formatAmount(totals[0])}</td>
-            <td>${formatAmount(totals[1])}</td>
-            <td>${formatAmount(totals[2])}</td>
-            <td>${formatAmount(totals[3])}</td>
-            <td>${formatAmount(totals[4])}</td>
+            <td>${displayTotals[0] || formatAmount(totals[0])}</td>
+            <td>${displayTotals[1] || formatAmount(totals[1])}</td>
+            <td>${displayTotals[2] || formatAmount(totals[2])}</td>
+            <td>${displayTotals[3] || formatAmount(totals[3])}</td>
+            <td>${displayTotals[4] || formatAmount(totals[4])}</td>
           </tr>
         `;
       }
@@ -3685,14 +4053,21 @@
         summaryDateRangeDisplay.addEventListener('click', () => {
           summaryDateRangePanel.classList.toggle('is-hidden');
         });
+      }
 
-        document.addEventListener('click', (event) => {
-          const rangeControl = event.target.closest('.date-range-control');
-          if (!rangeControl) {
-            summaryDateRangePanel.classList.add('is-hidden');
-          }
+      if (costeoLoadDateRangeDisplay && costeoLoadDateRangePanel) {
+        costeoLoadDateRangeDisplay.addEventListener('click', () => {
+          costeoLoadDateRangePanel.classList.toggle('is-hidden');
         });
       }
+
+      document.addEventListener('click', (event) => {
+        const rangeControl = event.target.closest('.date-range-control');
+        if (!rangeControl) {
+          summaryDateRangePanel?.classList.add('is-hidden');
+          costeoLoadDateRangePanel?.classList.add('is-hidden');
+        }
+      });
 
       [summaryDateStartFilter, summaryDateEndFilter].forEach((dateInput) => {
         if (!dateInput) return;
@@ -3701,6 +4076,29 @@
             summaryDateEndFilter.value = summaryDateStartFilter.value;
           }
           syncSummaryDateRangeDisplay();
+        });
+      });
+
+      [costeoLoadDateStartFilter, costeoLoadDateEndFilter].forEach((dateInput) => {
+        if (!dateInput) return;
+        dateInput.addEventListener('change', () => {
+          if (costeoLoadDateStartFilter.value && costeoLoadDateEndFilter.value && costeoLoadDateStartFilter.value > costeoLoadDateEndFilter.value) {
+            costeoLoadDateEndFilter.value = costeoLoadDateStartFilter.value;
+          }
+          syncCosteoLoadDateRangeDisplay();
+          applyCosteoLoadFilters();
+        });
+      });
+
+      [costeoLoadSearchField, costeoLoadSearchValue].forEach((filter) => {
+        if (!filter) return;
+        filter.addEventListener('input', () => {
+          syncCosteoLoadSearchVisibility();
+          applyCosteoLoadFilters();
+        });
+        filter.addEventListener('change', () => {
+          syncCosteoLoadSearchVisibility();
+          applyCosteoLoadFilters();
         });
       });
 
@@ -3733,6 +4131,7 @@
       backToDetail.addEventListener('click', closeCostDetailView);
 
       setupSummaryDateRange();
+      setupCosteoLoadFilters();
 
       openSummaryView();
       setComparadorExpanded(true);
